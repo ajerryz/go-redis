@@ -26,6 +26,7 @@ func HasErrorPrefix(err error, prefix string) bool {
 	return strings.HasPrefix(msg, prefix)
 }
 
+// Error go-redis error接口
 type Error interface {
 	error
 
@@ -33,6 +34,8 @@ type Error interface {
 	// serves to distinguish types that are Redis
 	// errors from ordinary errors: a type is a
 	// Redis error if it has a RedisError method.
+	// RedisError 是一个无操作函数，它可以区分 Redis错误类型和普通错误类型。如果某个类型包含RedisError方法
+	// 则该类型是一个Redis错误
 	RedisError()
 }
 

@@ -13,6 +13,7 @@ import (
 )
 
 // redis resp protocol data type.
+// redis resp 协议数据类型
 const (
 	RespStatus    = '+' // +<string>\r\n
 	RespError     = '-' // -<string>\r\n
@@ -40,6 +41,10 @@ const (
 
 const Nil = RedisError("redis: nil") // nolint:errname
 
+// RedisError
+// go-redis/error.Error 的具体实现
+// Error() 是std-lib 中的 error
+// RedisError() 是go-redis中error.Error 接口新增的方法.用于区分go-redis error还是 std-lib error
 type RedisError string
 
 func (e RedisError) Error() string { return string(e) }

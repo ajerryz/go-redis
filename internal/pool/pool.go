@@ -31,17 +31,18 @@ var timers = sync.Pool{
 	},
 }
 
-// Stats contains pool state information and accumulated stats.
+// Stats 包含了 池状态信息和累积统计信息
 type Stats struct {
-	Hits     uint32 // number of times free connection was found in the pool
-	Misses   uint32 // number of times free connection was NOT found in the pool
-	Timeouts uint32 // number of times a wait timeout occurred
+	Hits     uint32 // 池中发现空闲连接的次数
+	Misses   uint32 // 池中未找到可用连接的次数
+	Timeouts uint32 // 发生等待超时的次数
 
-	TotalConns uint32 // number of total connections in the pool
-	IdleConns  uint32 // number of idle connections in the pool
-	StaleConns uint32 // number of stale connections removed from the pool
+	TotalConns uint32 // 池中的连接总数
+	IdleConns  uint32 // 池中空闲连接数
+	StaleConns uint32 // 从池中删除的过时连接数
 }
 
+// Pooler redis连接池化的抽象接口
 type Pooler interface {
 	NewConn(context.Context) (*Conn, error)
 	CloseConn(*Conn) error
