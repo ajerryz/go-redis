@@ -660,18 +660,23 @@ type Client struct {
 }
 
 // NewClient returns a client to the Redis Server specified by Options.
+// 根据传递的Options 返回一个客户端实例
 func NewClient(opt *Options) *Client {
 	if opt == nil {
 		panic("redis: NewClient nil options")
 	}
-	opt.init()
+	opt.init() // opt默认值设置
 
+	// 创建Client实例
 	c := Client{
 		baseClient: &baseClient{
 			opt: opt,
 		},
 	}
+	// 客户端初始化
 	c.init()
+
+	// 初始化连接池
 	c.connPool = newConnPool(opt, c.dialHook)
 
 	return &c

@@ -98,6 +98,7 @@ type ConnPool struct {
 
 var _ Pooler = (*ConnPool)(nil)
 
+// NewConnPool 创建一个连接池(根据连接池选项)
 func NewConnPool(opt *Options) *ConnPool {
 	p := &ConnPool{
 		cfg: opt,
